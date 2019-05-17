@@ -93,8 +93,12 @@ endfunction
 " This function causes the terminal to flash as a side effect.  It would be
 " better if it didn't, but I can't figure out how.
 function! s:rawecho (str)
-  exec("silent! !echo " . shellescape(a:str))
-  redraw!
+  if has('nvim')
+    call chansend(v:stderr, a:str)
+  else
+    exec("silent! !echo " . shellescape(a:str))
+    redraw!
+  endif
 endfunction
 
 " Lookup table for s:b64encode.
