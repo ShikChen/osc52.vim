@@ -78,7 +78,7 @@ endfunction
 " better if it didn't, but I can't figure out how.
 function! s:rawecho(str)
   if has('nvim')
-    call chansend(v:stderr, a:str)
+    call writefile([a:str], '/dev/stderr', 'b')
   else
     exec("silent! !echo " . shellescape(a:str))
     redraw!
