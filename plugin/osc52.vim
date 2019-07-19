@@ -24,6 +24,7 @@ function! SendViaOSC52(str)
   endif
 
   call s:rawecho(osc52)
+  echo 'Copied ' . len . ' bytes'
 endfunction
 
 " This function base64's the entire string and wraps it in a single OSC52.
