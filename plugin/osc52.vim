@@ -78,9 +78,12 @@ endfunction
 " This function causes the terminal to flash as a side effect.  It would be
 " better if it didn't, but I can't figure out how.
 function! s:rawecho(str)
-  if has('nvim')
+  if filewritable('/dev/stderr')
+    " If possible, write the escape sequence directly to stderr.
     call writefile([a:str], '/dev/stderr', 'b')
   else
+    " Otherwise, fall back on a shell command to write the escape sequence. This
+    " requires a redraw and causes the screen to flash as a side effect.
     exec("silent! !echo " . shellescape(a:str))
     redraw!
   endif
