@@ -74,9 +74,6 @@ function! s:get_OSC52_DCS(str)
 endfunction
 
 " Echo a string to the terminal without munging the escape sequences.
-"
-" This function causes the terminal to flash as a side effect.  It would be
-" better if it didn't, but I can't figure out how.
 function! s:rawecho(str)
   if filewritable('/dev/stderr')
     " If possible, write the escape sequence directly to stderr.
